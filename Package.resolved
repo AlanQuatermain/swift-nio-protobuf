@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "swift-nio",
+        "repositoryURL": "https://github.com/apple/swift-nio",
+        "state": {
+          "branch": null,
+          "revision": "36a52e1ea3ec03007d67a046856e6b938a6ef81e",
+          "version": "2.0.0-convergence.1"
+        }
+      },
+      {
+        "package": "SwiftProtobuf",
+        "repositoryURL": "https://github.com/apple/swift-protobuf",
+        "state": {
+          "branch": null,
+          "revision": "6520fb185db88c0774a929acea1f7d5981a30d3a",
+          "version": "1.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
