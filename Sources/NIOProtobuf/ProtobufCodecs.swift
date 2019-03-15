@@ -28,6 +28,8 @@ public class ProtobufDecoder<T: Message>: ByteToMessageDecoder {
                 return try T(serializedData: data, extensions: self.extensionMap, options: self.decodingOptions)
             }
             context.fireChannelRead(NIOAny(message))
+            // don't forget to consume the bytes in the buffer
+            buffer.moveReaderIndex(forwardBy: buffer.readableBytes)
         } catch BinaryDecodingError.truncated {
             return .needMoreData
         }

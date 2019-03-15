@@ -24,6 +24,6 @@ let package = Package(
             dependencies: ["NIO", "SwiftProtobuf", "NIOFoundationCompat"]),
         .testTarget(
             name: "NIOProtobufTests",
-            dependencies: ["NIOProtobuf"]),
+            dependencies: ["NIOProtobuf", "NIO", "SwiftProtobuf"]),
     ]
 )

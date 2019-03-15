@@ -1,0 +1,17 @@
+//
+//  ProtobufDecoder.swift
+//  NIOProtobuf
+//
+//  Created by Jim Dovey on 3/14/19.
+//
+
+syntax = "proto3";
+package test;
+
+message Test {
+    // A simple string value.
+    string string_value = 1;
+
+    // A simple integer value.
+    int32 integer_value = 2;
+}

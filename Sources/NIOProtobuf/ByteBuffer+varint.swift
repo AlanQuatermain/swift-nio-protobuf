@@ -39,7 +39,7 @@ extension ByteBuffer {
                 self.writeInteger(UInt8(truncatingIfNeeded: value))
                 return
             } else {
-                self.writeInteger(UInt8(value & 0x7F))
+                self.writeInteger(UInt8(value & 0x7F) | 0x80)
                 value = value >> 7
             }
         }

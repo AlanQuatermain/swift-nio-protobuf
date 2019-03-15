@@ -8,7 +8,7 @@
 import NIO
 import SwiftProtobuf
 
-public class ProtobufVarintFrameDecoder: ByteToMessageDecoder {
+public class VarintFrameDecoder: ByteToMessageDecoder {
     public typealias InboundOut = ByteBuffer
 
     private var messageLength: Int? = nil
@@ -44,11 +44,11 @@ public class ProtobufVarintFrameDecoder: ByteToMessageDecoder {
     }
 }
 
-public class ProtobufVarintLengthFieldPrepender: MessageToByteEncoder {
+public class VarintLengthFieldPrepender: MessageToByteEncoder {
     public typealias OutboundIn = ByteBuffer
 
     public func encode(data: ByteBuffer, out: inout ByteBuffer) throws {
-        let bodyLen = out.readableBytes
+        let bodyLen = data.readableBytes
         out.writeVarint(bodyLen)
         out.writeBytes(data.readableBytesView)
     }
