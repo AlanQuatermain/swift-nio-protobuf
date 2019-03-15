@@ -1,9 +1,15 @@
+//===----------------------------------------------------------------------===//
 //
-//  ProtobufDecoder.swift
-//  NIOProtobuf
+// This source file is part of the SwiftProtobuf open source project
 //
-//  Created by Jim Dovey on 3/14/19.
+// Copyright (c) 2019 Circuit Dragon, Ltd.
+// Licensed under Apache License v2.0
 //
+// See LICENSE.txt for license information
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 syntax = "proto3";
 package test;

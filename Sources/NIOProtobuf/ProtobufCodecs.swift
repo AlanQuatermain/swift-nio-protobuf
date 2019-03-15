@@ -1,9 +1,15 @@
+//===----------------------------------------------------------------------===//
 //
-//  ProtobufDecoder.swift
-//  NIOProtobuf
+// This source file is part of the SwiftProtobuf open source project
 //
-//  Created by Jim Dovey on 3/13/19.
+// Copyright (c) 2019 Circuit Dragon, Ltd.
+// Licensed under Apache License v2.0
 //
+// See LICENSE.txt for license information
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
 
 import NIO
 import SwiftProtobuf
@@ -46,15 +52,5 @@ public class ProtobufEncoder<T: Message>: MessageToByteEncoder {
 
     public func encode(data: T, out: inout ByteBuffer) throws {
         out.writeBytes(try data.serializedData())
-    }
-}
-
-public class ProtobufLengthPrefixedEncoder<T: Message>: MessageToByteEncoder {
-    public typealias OutboundIn = T
-
-    public func encode(data: T, out: inout ByteBuffer) throws {
-        let bytes = try data.serializedData()
-        out.writeVarint(bytes.count)
-        out.writeBytes(bytes)
     }
 }

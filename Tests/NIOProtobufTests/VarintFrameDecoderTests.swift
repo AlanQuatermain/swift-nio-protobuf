@@ -1,3 +1,16 @@
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the SwiftProtobuf open source project
+//
+// Copyright (c) 2019 Circuit Dragon, Ltd.
+// Licensed under Apache License v2.0
+//
+// See LICENSE.txt for license information
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+//===----------------------------------------------------------------------===//
+
 import XCTest
 import NIO
 @testable import NIOProtobuf
