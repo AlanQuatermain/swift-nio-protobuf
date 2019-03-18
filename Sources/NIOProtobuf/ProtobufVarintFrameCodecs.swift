@@ -19,6 +19,8 @@ public class VarintFrameDecoder: ByteToMessageDecoder {
 
     private var messageLength: Int? = nil
 
+    public init() {}
+
     public func decode(context: ChannelHandlerContext, buffer: inout ByteBuffer) throws -> DecodingState {
         // If we don't have a length, we need to read one
         if self.messageLength == nil {
@@ -52,6 +54,8 @@ public class VarintFrameDecoder: ByteToMessageDecoder {
 
 public class VarintLengthFieldPrepender: MessageToByteEncoder {
     public typealias OutboundIn = ByteBuffer
+
+    public init() {}
 
     public func encode(data: ByteBuffer, out: inout ByteBuffer) throws {
         let bodyLen = data.readableBytes

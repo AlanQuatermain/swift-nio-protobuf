@@ -22,7 +22,7 @@ public class ProtobufDecoder<T: Message>: ByteToMessageDecoder {
     let extensionMap: ExtensionMap?
     let decodingOptions: BinaryDecodingOptions
 
-    init(extensionMap: ExtensionMap? = nil, options: BinaryDecodingOptions = BinaryDecodingOptions()) {
+    public init(extensionMap: ExtensionMap? = nil, options: BinaryDecodingOptions = BinaryDecodingOptions()) {
         self.extensionMap = extensionMap
         self.decodingOptions = options
     }
@@ -49,6 +49,8 @@ public class ProtobufDecoder<T: Message>: ByteToMessageDecoder {
 
 public class ProtobufEncoder<T: Message>: MessageToByteEncoder {
     public typealias OutboundIn = T
+
+    public func init() {}
 
     public func encode(data: T, out: inout ByteBuffer) throws {
         out.writeBytes(try data.serializedData())
