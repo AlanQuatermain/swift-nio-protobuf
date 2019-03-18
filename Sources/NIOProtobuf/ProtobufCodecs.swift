@@ -50,7 +50,7 @@ public class ProtobufDecoder<T: Message>: ByteToMessageDecoder {
 public class ProtobufEncoder<T: Message>: MessageToByteEncoder {
     public typealias OutboundIn = T
 
-    public func init() {}
+    public init() {}
 
     public func encode(data: T, out: inout ByteBuffer) throws {
         out.writeBytes(try data.serializedData())
