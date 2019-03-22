@@ -41,7 +41,7 @@ class VarintLengthFieldPrependerTests: XCTestCase {
         buffer.writeString(str1)
         XCTAssertEqual(3, buffer.readableBytes)
 
-        XCTAssertTrue(try self.channel.writeOutbound(buffer))
+        XCTAssertTrue(try self.channel.writeOutbound(buffer).isFull)
 
         var output: ByteBuffer? = try self.channel.readOutbound()
         XCTAssertEqual(4, output?.readableBytes)
@@ -53,7 +53,7 @@ class VarintLengthFieldPrependerTests: XCTestCase {
         buffer.writeString(str2)
         XCTAssertEqual(3, buffer.readableBytes)
 
-        XCTAssertTrue(try self.channel.writeOutbound(buffer))
+        XCTAssertTrue(try self.channel.writeOutbound(buffer).isFull)
 
         output = try self.channel.readOutbound()
         XCTAssertEqual(4, output?.readableBytes)
@@ -65,7 +65,7 @@ class VarintLengthFieldPrependerTests: XCTestCase {
         buffer.writeString(str3)
         XCTAssertEqual(5, buffer.readableBytes)
 
-        XCTAssertTrue(try self.channel.writeOutbound(buffer))
+        XCTAssertTrue(try self.channel.writeOutbound(buffer).isFull)
 
         output = try self.channel.readOutbound()
         XCTAssertEqual(6, output?.readableBytes)
@@ -77,7 +77,7 @@ class VarintLengthFieldPrependerTests: XCTestCase {
         buffer.writeString(str4)
         XCTAssertEqual(512, buffer.readableBytes)
 
-        XCTAssertTrue(try self.channel.writeOutbound(buffer))
+        XCTAssertTrue(try self.channel.writeOutbound(buffer).isFull)
 
         output = try self.channel.readOutbound()
         XCTAssertEqual(514, output?.readableBytes)

@@ -41,7 +41,7 @@ class ProtobufEncoderStackTests: XCTestCase {
         message.stringValue = "This is a test."
         message.integerValue = 2_049_920
 
-        XCTAssertTrue(try self.channel.writeOutbound(message))
+        XCTAssertTrue(try self.channel.writeOutbound(message).isFull)
 
         var buffer: ByteBuffer! = try self.channel.readOutbound()
         XCTAssertNotNil(buffer)
@@ -66,12 +66,12 @@ class ProtobufEncoderStackTests: XCTestCase {
         message.stringValue = "This is the first message."
         message.integerValue = 1
 
-        XCTAssertTrue(try self.channel.writeOutbound(message))
+        XCTAssertTrue(try self.channel.writeOutbound(message).isFull)
 
         message.stringValue = "This is the second message."
         message.integerValue = 2
 
-        XCTAssertTrue(try self.channel.writeOutbound(message))
+        XCTAssertTrue(try self.channel.writeOutbound(message).isFull)
 
         // Pull out data blob.
         var buffer: ByteBuffer! = try self.channel.readOutbound()

@@ -48,7 +48,7 @@ class ProtobufDecoderTests: XCTestCase {
         buffer.writeBytes(data)
 
         // Feed in this data in one go.
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         // We should get a decoded message out the other end.
         let output: Test_Test! = try self.channel.readInbound()
@@ -70,9 +70,9 @@ class ProtobufDecoderTests: XCTestCase {
         buffer.writeBytes(data)
 
         // Feed in this data in two chunks.
-        XCTAssertFalse(try self.channel.writeInbound(buffer.readSlice(length: buffer.readableBytes/2)!))
+        XCTAssertFalse(try self.channel.writeInbound(buffer.readSlice(length: buffer.readableBytes/2)!).isFull)
         XCTAssertNil(try self.channel.readInbound())    // nothing output yet...
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         // We should get a decoded message out the other end.
         let output: Test_Test! = try self.channel.readInbound()

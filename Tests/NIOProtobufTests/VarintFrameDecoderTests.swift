@@ -40,7 +40,7 @@ final class VarintFrameDecoderTests: XCTestCase {
         lengthBuf.writeVarint(message.count + 1)
 
         // Write the length in one go (in this example, it's one byte).
-        XCTAssertFalse(try self.channel.writeInbound(lengthBuf))
+        XCTAssertFalse(try self.channel.writeInbound(lengthBuf).isFull)
 
         // Now write the string bytes, one by one.
         try message.forEach {
@@ -48,13 +48,13 @@ final class VarintFrameDecoderTests: XCTestCase {
             buffer.writeString("\($0)")
 
             // Data should get buffered until we've written everything
-            XCTAssertFalse(try self.channel.writeInbound(buffer))
+            XCTAssertFalse(try self.channel.writeInbound(buffer).isFull)
         }
 
         // Add the tenth character and it should flush through.
         var buffer = self.channel.allocator.buffer(capacity: 1)
         buffer.writeStaticString("j")
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         // Now we should have a buffer to read.
         var input: ByteBuffer!
@@ -77,7 +77,7 @@ final class VarintFrameDecoderTests: XCTestCase {
         buffer.writeString(message)
 
         // Funnel this all in, and it should be consumed completely.
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         var input: ByteBuffer? = try self.channel.readInbound()
         XCTAssertEqual(1024, input?.readableBytes)
@@ -89,7 +89,7 @@ final class VarintFrameDecoderTests: XCTestCase {
         buffer.writeVarint(0)
         XCTAssertEqual(1, buffer.readableBytes)
 
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         let input: ByteBuffer? = try self.channel.readInbound()
         XCTAssertEqual(0, input?.readableBytes)

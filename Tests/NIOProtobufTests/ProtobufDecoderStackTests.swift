@@ -47,7 +47,7 @@ class ProtobufDecoderStackTests: XCTestCase {
         buffer.writeVarint(messageBytes.count)
         buffer.writeBytes(messageBytes)
 
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         let output: Test_Test! = try self.channel.readInbound()
         XCTAssertNotNil(output)
@@ -72,7 +72,7 @@ class ProtobufDecoderStackTests: XCTestCase {
         buffer.writeVarint(messageBytes2.count)
         buffer.writeBytes(messageBytes2)
 
-        XCTAssertTrue(try self.channel.writeInbound(buffer))
+        XCTAssertTrue(try self.channel.writeInbound(buffer).isFull)
 
         var output: Test_Test! = try self.channel.readInbound()
         XCTAssertNotNil(output)

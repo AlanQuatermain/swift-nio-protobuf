@@ -40,7 +40,7 @@ class ProtobufEncoderTests: XCTestCase {
         message.integerValue = Int32(UInt16.max)
 
         // Writing a whole message, should get encoded and flushed immediately.
-        XCTAssertTrue(try self.channel.writeOutbound(message))
+        XCTAssertTrue(try self.channel.writeOutbound(message).isFull)
 
         // Should have a blob of data coming out the other side.
         var output: ByteBuffer? = try self.channel.readOutbound()
